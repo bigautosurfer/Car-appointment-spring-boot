@@ -1,0 +1,19 @@
+version: "2"
+
+services:
+  postgresdb:
+    image: postgres
+    environment:
+      - POSTGRES-PASSWORD=password
+    ports:
+      - 5432:5432
+  
+  carappointment:
+    depends_on:
+      - "postgresdb"
+    build: .
+    links:
+      - "postgresdb"
+    image: springboot-car-appointment
+    ports:
+      - 8080:8080
